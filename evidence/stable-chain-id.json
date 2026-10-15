@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-15T21:28:34Z",
+  "rpc": "https://studio.genlayer.com/api",
+  "method": "eth_chainId",
+  "http_status": 200,
+  "response": {
+    "jsonrpc": "2.0",
+    "result": "0xf22f",
+    "id": 1
+  },
+  "chain_id": 61999,
+  "deployment": false,
+  "model_execution": false
+}

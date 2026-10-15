@@ -1,0 +1,7 @@
+{
+  "checked_at": "2026-10-15T21:31:58.026Z",
+  "chain_id": 61999,
+  "read_only": true,
+  "error": "UnknownRpcError: An unknown RPC error occurred.\n\nDetails: fetch failed\nVersion: viem@2.38.5",
+  "fallback_http_result": "HTTP 403 on gen_getContractSchemaForCode; no retry. Chain-ID read separately succeeded with 61999."
+}

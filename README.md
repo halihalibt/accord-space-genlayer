@@ -23,9 +23,9 @@ condition, `(A=2, B=0, C=1)` is feasible and becomes binding protocol state only
 after all three participants explicitly approve it.
 
 This records a shared program plan, not proof that the real event occurred.
-Participants do not edit a frontend world. The companion product is planned as
-霁境 / Jijing: an ice-jade reading and negotiation space using an already approved
-visual baseline. Repository B and its frontend have not been created in Phase 1.
+Participants do not edit a frontend world. The companion product is [霁境 / Jijing](https://github.com/halihalibt/jijing-accordspace):
+an ice-jade negotiation space preserving the approved original visual, with
+a fixed tutorial and wallet client. Real chain E2E remains pending.
 
 ## Run offline
 
@@ -72,9 +72,9 @@ or global uniqueness. See [comparison](docs/ORIGINALITY.md).
 - Every participant can cancel before commitment; inactivity can prevent progress.
 
 Planned network is **Stable Studionet only**, chain ID **61999**,
-`https://studio.genlayer.com/api`. The current workspace's read-only checks
-returned HTTP 403, so current chain identity, SDK compatibility, latency and
-faucet access are unverified. No alternative network is authorized.
+`https://studio.genlayer.com/api`. The latest chain-ID read returned 61999 on 2026-10-15 UTC, while source-schema
+preflight remained blocked by HTTP 403. Runner compatibility, model agreement,
+latency and faucet access are unverified. No alternative network is authorized.
 
 See [protocol](docs/PROTOCOL_V1.md), [integration boundary](contracts/README.md),
 [checkpoint](PROJECT_CHECKPOINT.md), and [stage rules](AGENTS.md). MIT licensed.
