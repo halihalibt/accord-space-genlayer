@@ -1,0 +1,373 @@
+"""Bounded semantic constraint negotiation. NOT a deployable GenLayer contract.
+
+The future adapter must derive sender from the runtime and obtain compilation
+only from accepted independent consensus, never from user-supplied ASTs/masks.
+All transitions return new values; exceptions leave the original state intact.
+"""
+from copy import deepcopy
+from hashlib import sha256
+from itertools import product
+import json
+import re
+
+PROTOCOL = "ACCORD-SPACE-V1"
+MAX_WORLDS = 64
+MAX_CLAUSES = 8
+MAX_NODES = 64
+MAX_DEPTH = 8
+
+
+class ProtocolError(ValueError):
+    pass
+
+
+def require(ok, code):
+    if not ok:
+        raise ProtocolError(code)
+
+
+def exact_keys(value, keys, code="BAD_SHAPE"):
+    require(type(value) is dict and set(value) == set(keys), code)
+
+
+def text(value, lo, hi):
+    require(type(value) is str and lo <= len(value.strip()) <= hi, "BAD_TEXT")
+    require(not any(ord(c) < 32 and c not in "\n\t" for c in value), "CONTROL_CHAR")
+    return value.strip()
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False, allow_nan=False)
+
+
+def digest(value):
+    return sha256(canonical(value).encode("utf-8")).hexdigest()
+
+
+def strict_json(raw):
+    require(type(raw) is str and len(raw.encode("utf-8")) <= 32768, "BAD_JSON_SIZE")
+
+    def pairs(items):
+        result = {}
+        for k, v in items:
+            require(k not in result, "DUPLICATE_KEY")
+            result[k] = v
+        return result
+
+    def reject(value):
+        raise ProtocolError("NONFINITE_JSON")
+
+    try:
+        return json.loads(raw, object_pairs_hook=pairs, parse_constant=reject)
+    except (ValueError, RecursionError) as exc:
+        if isinstance(exc, ProtocolError):
+            raise
+        raise ProtocolError("BAD_JSON") from exc
+
+
+def address(value):
+    require(type(value) is str and re.fullmatch(r"0x[0-9a-fA-F]{40}", value) is not None,
+            "BAD_ADDRESS")
+    value = value.lower()
+    require(value != "0x" + "0" * 40, "ZERO_ADDRESS")
+    return value
+
+
+def scalar(value):
+    if type(value) is int:
+        require(-1000 <= value <= 1000, "BAD_SCALAR")
+    elif type(value) is str:
+        require(1 <= len(value) <= 40 and value == value.strip(), "BAD_SCALAR")
+        require(not any(ord(c) < 32 for c in value), "BAD_SCALAR")
+    elif type(value) is not bool:
+        raise ProtocolError("BAD_SCALAR")
+    return value
+
+
+def domain(spec):
+    require(type(spec) is list and 1 <= len(spec) <= 4, "BAD_VARIABLE_COUNT")
+    out, seen, count = [], set(), 1
+    for item in spec:
+        exact_keys(item, ("id", "meaning", "values"))
+        key = item["id"]
+        require(type(key) is str and re.fullmatch(r"[a-z][a-z0-9_]{0,15}", key) is not None,
+                "BAD_VARIABLE_ID")
+        require(key not in seen, "DUPLICATE_VARIABLE")
+        seen.add(key)
+        values = item["values"]
+        require(type(values) is list and 2 <= len(values) <= 4, "BAD_VALUE_COUNT")
+        values = [scalar(v) for v in values]
+        require(all(type(v) is type(values[0]) for v in values), "MIXED_DOMAIN_TYPES")
+        require(len({canonical(v) for v in values}) == len(values), "DUPLICATE_VALUE")
+        count *= len(values)
+        require(count <= MAX_WORLDS, "WORLD_LIMIT")
+        out.append({"id": key, "meaning": text(item["meaning"], 1, 160), "values": values[:]})
+    return out
+
+
+def worlds(spec):
+    spec = domain(spec)
+    keys = [v["id"] for v in spec]
+    return [dict(zip(keys, row)) for row in product(*(v["values"] for v in spec))]
+
+
+def validated_expr(expr, spec):
+    """Validate a non-executable, typed AST; no eval, code, calls or arithmetic."""
+    spec = domain(spec)
+    types = {v["id"]: type(v["values"][0]) for v in spec}
+    count = [0]
+
+    def visit(node, depth, operand=False):
+        count[0] += 1
+        require(depth <= MAX_DEPTH and count[0] <= MAX_NODES, "AST_LIMIT")
+        require(type(node) is dict, "BAD_AST")
+        if operand:
+            if set(node) == {"var"}:
+                require(type(node["var"]) is str and node["var"] in types, "UNKNOWN_VARIABLE")
+                return types[node["var"]]
+            exact_keys(node, ("lit",), "BAD_OPERAND")
+            return type(scalar(node["lit"]))
+        op = node.get("op")
+        require(type(op) is str, "BAD_OPERATOR")
+        if op in ("and", "or"):
+            exact_keys(node, ("op", "args"), "BAD_AST")
+            require(type(node["args"]) is list and 2 <= len(node["args"]) <= 8, "BAD_ARITY")
+            for child in node["args"]:
+                visit(child, depth + 1)
+        elif op == "not":
+            exact_keys(node, ("op", "arg"), "BAD_AST")
+            visit(node["arg"], depth + 1)
+        elif op in ("eq", "ne", "lt", "le"):
+            exact_keys(node, ("op", "left", "right"), "BAD_AST")
+            left = visit(node["left"], depth + 1, True)
+            right = visit(node["right"], depth + 1, True)
+            require(left is right, "TYPE_MISMATCH")
+            require(op in ("eq", "ne") or left is int, "ORDER_REQUIRES_INT")
+        else:
+            raise ProtocolError("BAD_OPERATOR")
+
+    visit(expr, 1)
+    return deepcopy(expr)
+
+
+def _eval(expr, row):
+    op = expr["op"]
+    if op == "and":
+        return all(_eval(e, row) for e in expr["args"])
+    if op == "or":
+        return any(_eval(e, row) for e in expr["args"])
+    if op == "not":
+        return not _eval(expr["arg"], row)
+    a = expr["left"]
+    b = expr["right"]
+    a = row[a["var"]] if "var" in a else a["lit"]
+    b = row[b["var"]] if "var" in b else b["lit"]
+    if op == "eq":
+        return a == b
+    if op == "ne":
+        return a != b
+    if op == "lt":
+        return a < b
+    return a <= b
+
+
+def behavior(expr, spec):
+    expr = validated_expr(expr, spec)
+    return sum(1 << i for i, w in enumerate(worlds(spec)) if _eval(expr, w))
+
+
+def diagnose(masks, world_count):
+    """All inclusion-minimal cores/corrections, with bounded witness indices.
+
+    These are mathematical facts about accepted finite masks, not a proof that
+    the AI faithfully translated the original natural-language constraints.
+    """
+    require(type(world_count) is int and 1 <= world_count <= MAX_WORLDS, "WORLD_LIMIT")
+    require(type(masks) is list and len(masks) <= MAX_CLAUSES, "CLAUSE_LIMIT")
+    universe = (1 << world_count) - 1
+    require(all(type(m) is int and 0 <= m <= universe for m in masks), "BAD_MASK")
+    n = len(masks)
+    intersections = [universe] * (1 << n)
+    for s in range(1, 1 << n):
+        bit = s & -s
+        intersections[s] = intersections[s ^ bit] & masks[bit.bit_length() - 1]
+    full = (1 << n) - 1
+
+    def members(s):
+        return [i for i in range(n) if s & (1 << i)]
+
+    def witness(mask):
+        require(mask != 0, "NO_WITNESS")
+        return (mask & -mask).bit_length() - 1
+
+    feasible = intersections[full]
+    cores, repairs = [], []
+    if not feasible:
+        for s in range(1, 1 << n):
+            ids = members(s)
+            if intersections[s] == 0 and all(intersections[s ^ (1 << i)] for i in ids):
+                cores.append({"members": ids, "deletion_witnesses": [
+                    {"removed": i, "world": witness(intersections[s ^ (1 << i)])}
+                    for i in ids]})
+            kept = full ^ s
+            if intersections[kept] and all(intersections[kept | (1 << i)] == 0 for i in ids):
+                repairs.append({"remove": ids, "world": witness(intersections[kept])})
+    return {"feasible_mask": feasible,
+            "world_ids": [i for i in range(world_count) if feasible & (1 << i)],
+            "minimal_cores": cores, "minimal_corrections": repairs}
+
+
+def create(session_id, roster, spec):
+    require(type(session_id) is str and re.fullmatch(r"[A-Za-z0-9_-]{1,64}", session_id), "BAD_ID")
+    require(type(roster) is list and 2 <= len(roster) <= 4, "BAD_ROSTER")
+    roster = [address(a) for a in roster]
+    require(len(set(roster)) == len(roster), "DUPLICATE_MEMBER")
+    state = {"protocol": PROTOCOL, "id": session_id, "roster": roster,
+             "domain": domain(spec), "sealed": {}, "status": "COLLECTING",
+             "revision": 0, "compilation": None, "masks": [], "waived": [],
+             "approvals": {}, "committed": None, "input_hash": None,
+             "diagnosis": None, "cancelled_by": None}
+    return state
+
+
+def _member(state, sender):
+    sender = address(sender)
+    require(sender in state["roster"], "NOT_MEMBER")
+    return sender
+
+
+def _clauses(state):
+    result = []
+    for owner in state["roster"]:
+        for value in state["sealed"].get(owner, []):
+            result.append({"id": f"C{len(result)}", "owner": owner, "text": value})
+    return result
+
+
+def seal(state, sender, clauses):
+    sender = _member(state, sender)
+    require(state["status"] == "COLLECTING", "NOT_COLLECTING")
+    require(sender not in state["sealed"], "ALREADY_SEALED")
+    require(type(clauses) is list and 1 <= len(clauses) <= 2, "BAD_CLAUSES")
+    clauses = [text(c, 1, 480) for c in clauses]
+    require(len(set(clauses)) == len(clauses), "DUPLICATE_CLAUSE")
+    new = deepcopy(state)
+    new["sealed"][sender] = clauses
+    if len(new["sealed"]) == len(new["roster"]):
+        new["status"] = "AWAITING_COMPILATION"
+        new["input_hash"] = digest({"protocol": PROTOCOL, "id": new["id"],
+                                   "roster": new["roster"], "domain": new["domain"],
+                                   "clauses": _clauses(new)})
+    return new
+
+
+def parse_compilation(state, raw):
+    """Deterministic artifact validation, NOT semantic validation or consensus."""
+    require(state["status"] == "AWAITING_COMPILATION", "NOT_AWAITING_COMPILATION")
+    data = strict_json(raw)
+    exact_keys(data, ("input_hash", "rules"))
+    require(data["input_hash"] == state["input_hash"], "INPUT_MISMATCH")
+    clauses = _clauses(state)
+    require(type(data["rules"]) is list and len(data["rules"]) == len(clauses), "RULE_COUNT")
+    normalized = []
+    for clause, rule in zip(clauses, data["rules"]):
+        exact_keys(rule, ("clause_id", "status", "expr"))
+        require(rule["clause_id"] == clause["id"], "RULE_ID")
+        require(rule["status"] in ("COMPILED", "UNKNOWN"), "RULE_STATUS")
+        if rule["status"] == "UNKNOWN":
+            require(rule["expr"] is None, "UNKNOWN_WITH_EXPR")
+            normalized.append({**rule, "mask": None})
+        else:
+            expr = validated_expr(rule["expr"], state["domain"])
+            normalized.append({**rule, "expr": expr, "mask": behavior(expr, state["domain"])})
+    return normalized
+
+
+def equivalent(state, leader_raw, independent_raw):
+    """Compare separately supplied artifacts over the ENTIRE frozen domain.
+
+    The future validator must actually produce independent_raw itself.
+    Equal aggregate feasibility is insufficient: individual owner relaxations
+    can expose a disagreement hidden by the current empty intersection.
+    """
+    a = parse_compilation(state, leader_raw)
+    b = parse_compilation(state, independent_raw)
+    return [(r["status"], r["mask"]) for r in a] == [(r["status"], r["mask"]) for r in b]
+
+
+def _refresh(state):
+    active = [i for i in range(len(state["masks"])) if i not in state["waived"]]
+    d = diagnose([state["masks"][i] for i in active], len(worlds(state["domain"])))
+    for core in d["minimal_cores"]:
+        core["members"] = [active[i] for i in core["members"]]
+        for w in core["deletion_witnesses"]:
+            w["removed"] = active[w["removed"]]
+    for repair in d["minimal_corrections"]:
+        repair["remove"] = [active[i] for i in repair["remove"]]
+    state["diagnosis"] = d
+    state["status"] = "FEASIBLE" if d["feasible_mask"] else "BLOCKED"
+
+
+def install_accepted_compilation(state, raw):
+    """Adapter-internal boundary. MUST NOT become a public write accepting raw.
+
+    Phase 1 tests inject fixtures here. No claim of real model/consensus runs.
+    """
+    parsed = parse_compilation(state, raw)
+    new = deepcopy(state)
+    new["compilation"] = parsed
+    if any(r["status"] == "UNKNOWN" for r in parsed):
+        new["status"] = "REVIEW_REQUIRED"
+    else:
+        new["masks"] = [r["mask"] for r in parsed]
+        _refresh(new)
+    return new
+
+
+def state_hash(state):
+    return digest({"input_hash": state["input_hash"], "revision": state["revision"],
+                   "masks": state["masks"], "waived": state["waived"],
+                   "status": state["status"]})
+
+
+def waive(state, sender, clause_id, expected_hash):
+    sender = _member(state, sender)
+    require(state["status"] in ("FEASIBLE", "BLOCKED"), "NOT_NEGOTIABLE")
+    require(expected_hash == state_hash(state), "STALE_STATE")
+    require(type(clause_id) is str, "BAD_CLAUSE_ID")
+    ids = {c["id"]: i for i, c in enumerate(_clauses(state))}
+    require(clause_id in ids, "BAD_CLAUSE_ID")
+    i = ids[clause_id]
+    require(_clauses(state)[i]["owner"] == sender, "NOT_CLAUSE_OWNER")
+    require(i not in state["waived"], "ALREADY_WAIVED")
+    new = deepcopy(state)
+    new["waived"] = sorted(new["waived"] + [i])
+    new["revision"] += 1
+    new["approvals"] = {}
+    _refresh(new)
+    return new
+
+
+def approve(state, sender, world_id, expected_hash):
+    sender = _member(state, sender)
+    require(state["status"] == "FEASIBLE", "NOT_FEASIBLE")
+    require(expected_hash == state_hash(state), "STALE_STATE")
+    require(type(world_id) is int and world_id in state["diagnosis"]["world_ids"], "BAD_WORLD")
+    new = deepcopy(state)
+    new["approvals"][sender] = world_id
+    if len(new["approvals"]) == len(new["roster"]) and len(set(new["approvals"].values())) == 1:
+        new["committed"] = {"world_id": world_id, "plan": worlds(new["domain"])[world_id],
+                            "revision": new["revision"], "state_hash": expected_hash}
+        new["status"] = "COMMITTED"
+    return new
+
+
+def cancel(state, sender):
+    sender = _member(state, sender)
+    require(state["status"] not in ("COMMITTED", "CANCELLED"), "TERMINAL")
+    new = deepcopy(state)
+    new["status"] = "CANCELLED"
+    new["cancelled_by"] = sender
+    new["approvals"] = {}
+    return new

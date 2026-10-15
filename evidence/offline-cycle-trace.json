@@ -1,0 +1,409 @@
+{
+  "evidence_type": "OFFLINE_DETERMINISTIC_FIXTURE",
+  "trace": [
+    {
+      "state": {
+        "approvals": {},
+        "cancelled_by": null,
+        "committed": null,
+        "compilation": [
+          {
+            "clause_id": "C0",
+            "expr": {
+              "left": {
+                "var": "a"
+              },
+              "op": "lt",
+              "right": {
+                "var": "b"
+              }
+            },
+            "mask": 229880,
+            "status": "COMPILED"
+          },
+          {
+            "clause_id": "C1",
+            "expr": {
+              "left": {
+                "var": "b"
+              },
+              "op": "lt",
+              "right": {
+                "var": "c"
+              }
+            },
+            "mask": 9980966,
+            "status": "COMPILED"
+          },
+          {
+            "clause_id": "C2",
+            "expr": {
+              "left": {
+                "var": "c"
+              },
+              "op": "lt",
+              "right": {
+                "var": "a"
+              }
+            },
+            "mask": 57446912,
+            "status": "COMPILED"
+          }
+        ],
+        "diagnosis": {
+          "feasible_mask": 0,
+          "minimal_cores": [
+            {
+              "deletion_witnesses": [
+                {
+                  "removed": 0,
+                  "world": 19
+                },
+                {
+                  "removed": 1,
+                  "world": 15
+                },
+                {
+                  "removed": 2,
+                  "world": 5
+                }
+              ],
+              "members": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "minimal_corrections": [
+            {
+              "remove": [
+                0
+              ],
+              "world": 19
+            },
+            {
+              "remove": [
+                1
+              ],
+              "world": 15
+            },
+            {
+              "remove": [
+                2
+              ],
+              "world": 5
+            }
+          ],
+          "world_ids": []
+        },
+        "domain": [
+          {
+            "id": "a",
+            "meaning": "Position of program a",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "id": "b",
+            "meaning": "Position of program b",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "id": "c",
+            "meaning": "Position of program c",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "id": "jijing-gathering-001",
+        "input_hash": "e6eaf6daebbf543e3469b9190f5e5fd2effdc2e1cd8ed4c57cbdf30fcd1e82ee",
+        "masks": [
+          229880,
+          9980966,
+          57446912
+        ],
+        "protocol": "ACCORD-SPACE-V1",
+        "revision": 0,
+        "roster": [
+          "0x1111111111111111111111111111111111111111",
+          "0x2222222222222222222222222222222222222222",
+          "0x3333333333333333333333333333333333333333"
+        ],
+        "sealed": {
+          "0x1111111111111111111111111111111111111111": [
+            "A must precede B"
+          ],
+          "0x2222222222222222222222222222222222222222": [
+            "B must precede C"
+          ],
+          "0x3333333333333333333333333333333333333333": [
+            "C must precede A"
+          ]
+        },
+        "status": "BLOCKED",
+        "waived": []
+      },
+      "step": "FIXTURE_COMPILATION"
+    },
+    {
+      "state": {
+        "approvals": {},
+        "cancelled_by": null,
+        "committed": null,
+        "compilation": [
+          {
+            "clause_id": "C0",
+            "expr": {
+              "left": {
+                "var": "a"
+              },
+              "op": "lt",
+              "right": {
+                "var": "b"
+              }
+            },
+            "mask": 229880,
+            "status": "COMPILED"
+          },
+          {
+            "clause_id": "C1",
+            "expr": {
+              "left": {
+                "var": "b"
+              },
+              "op": "lt",
+              "right": {
+                "var": "c"
+              }
+            },
+            "mask": 9980966,
+            "status": "COMPILED"
+          },
+          {
+            "clause_id": "C2",
+            "expr": {
+              "left": {
+                "var": "c"
+              },
+              "op": "lt",
+              "right": {
+                "var": "a"
+              }
+            },
+            "mask": 57446912,
+            "status": "COMPILED"
+          }
+        ],
+        "diagnosis": {
+          "feasible_mask": 524288,
+          "minimal_cores": [],
+          "minimal_corrections": [],
+          "world_ids": [
+            19
+          ]
+        },
+        "domain": [
+          {
+            "id": "a",
+            "meaning": "Position of program a",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "id": "b",
+            "meaning": "Position of program b",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "id": "c",
+            "meaning": "Position of program c",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "id": "jijing-gathering-001",
+        "input_hash": "e6eaf6daebbf543e3469b9190f5e5fd2effdc2e1cd8ed4c57cbdf30fcd1e82ee",
+        "masks": [
+          229880,
+          9980966,
+          57446912
+        ],
+        "protocol": "ACCORD-SPACE-V1",
+        "revision": 1,
+        "roster": [
+          "0x1111111111111111111111111111111111111111",
+          "0x2222222222222222222222222222222222222222",
+          "0x3333333333333333333333333333333333333333"
+        ],
+        "sealed": {
+          "0x1111111111111111111111111111111111111111": [
+            "A must precede B"
+          ],
+          "0x2222222222222222222222222222222222222222": [
+            "B must precede C"
+          ],
+          "0x3333333333333333333333333333333333333333": [
+            "C must precede A"
+          ]
+        },
+        "status": "FEASIBLE",
+        "waived": [
+          0
+        ]
+      },
+      "step": "OWNER_WAIVES_OWN_CLAUSE"
+    },
+    {
+      "state": {
+        "approvals": {
+          "0x1111111111111111111111111111111111111111": 19,
+          "0x2222222222222222222222222222222222222222": 19,
+          "0x3333333333333333333333333333333333333333": 19
+        },
+        "cancelled_by": null,
+        "committed": {
+          "plan": {
+            "a": 2,
+            "b": 0,
+            "c": 1
+          },
+          "revision": 1,
+          "state_hash": "ba86316ddf6e9819e5452d7509088e7525c8dae16b7749467f328c222af53f62",
+          "world_id": 19
+        },
+        "compilation": [
+          {
+            "clause_id": "C0",
+            "expr": {
+              "left": {
+                "var": "a"
+              },
+              "op": "lt",
+              "right": {
+                "var": "b"
+              }
+            },
+            "mask": 229880,
+            "status": "COMPILED"
+          },
+          {
+            "clause_id": "C1",
+            "expr": {
+              "left": {
+                "var": "b"
+              },
+              "op": "lt",
+              "right": {
+                "var": "c"
+              }
+            },
+            "mask": 9980966,
+            "status": "COMPILED"
+          },
+          {
+            "clause_id": "C2",
+            "expr": {
+              "left": {
+                "var": "c"
+              },
+              "op": "lt",
+              "right": {
+                "var": "a"
+              }
+            },
+            "mask": 57446912,
+            "status": "COMPILED"
+          }
+        ],
+        "diagnosis": {
+          "feasible_mask": 524288,
+          "minimal_cores": [],
+          "minimal_corrections": [],
+          "world_ids": [
+            19
+          ]
+        },
+        "domain": [
+          {
+            "id": "a",
+            "meaning": "Position of program a",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "id": "b",
+            "meaning": "Position of program b",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "id": "c",
+            "meaning": "Position of program c",
+            "values": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "id": "jijing-gathering-001",
+        "input_hash": "e6eaf6daebbf543e3469b9190f5e5fd2effdc2e1cd8ed4c57cbdf30fcd1e82ee",
+        "masks": [
+          229880,
+          9980966,
+          57446912
+        ],
+        "protocol": "ACCORD-SPACE-V1",
+        "revision": 1,
+        "roster": [
+          "0x1111111111111111111111111111111111111111",
+          "0x2222222222222222222222222222222222222222",
+          "0x3333333333333333333333333333333333333333"
+        ],
+        "sealed": {
+          "0x1111111111111111111111111111111111111111": [
+            "A must precede B"
+          ],
+          "0x2222222222222222222222222222222222222222": [
+            "B must precede C"
+          ],
+          "0x3333333333333333333333333333333333333333": [
+            "C must precede A"
+          ]
+        },
+        "status": "COMMITTED",
+        "waived": [
+          0
+        ]
+      },
+      "step": "ALL_MEMBERS_APPROVE_SAME_PLAN"
+    }
+  ]
+}

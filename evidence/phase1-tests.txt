@@ -1,0 +1,30 @@
+test_boolean_composition (test_core.ASTTests.test_boolean_composition) ... ok
+test_depth_node_and_cycle_bounds (test_core.ASTTests.test_depth_node_and_cycle_bounds) ... ok
+test_nonidentical_asts_full_domain_equivalent (test_core.ASTTests.test_nonidentical_asts_full_domain_equivalent) ... ok
+test_same_current_verdict_hides_material_future_disagreement (test_core.ASTTests.test_same_current_verdict_hides_material_future_disagreement) ... ok
+test_unknown_operator_variables_arity_type_and_code (test_core.ASTTests.test_unknown_operator_variables_arity_type_and_code) ... ok
+test_cartesian_complete_and_order_pinned (test_core.DomainTests.test_cartesian_complete_and_order_pinned) ... ok
+test_defensive_copy_and_typed_boolean (test_core.DomainTests.test_defensive_copy_and_typed_boolean) ... ok
+test_domain_hard_bounds_and_scalar_types (test_core.DomainTests.test_domain_hard_bounds_and_scalar_types) ... ok
+test_strict_json_rejects_duplicate_nonfinite_code_and_bad_shapes (test_core.DomainTests.test_strict_json_rejects_duplicate_nonfinite_code_and_bad_shapes) ... ok
+test_all_members_same_plan_required_and_commit_terminal (test_core.LifecycleTests.test_all_members_same_plan_required_and_commit_terminal) ... ok
+test_cancel_from_every_nonfinal_phase (test_core.LifecycleTests.test_cancel_from_every_nonfinal_phase) ... ok
+test_compilation_errors_atomic_and_never_unknown_fallback (test_core.LifecycleTests.test_compilation_errors_atomic_and_never_unknown_fallback) ... ok
+test_different_choices_never_commit_and_own_choice_can_change (test_core.LifecycleTests.test_different_choices_never_commit_and_own_choice_can_change) ... ok
+test_input_hash_covers_every_semantic_input (test_core.LifecycleTests.test_input_hash_covers_every_semantic_input) ... ok
+test_invalid_world_and_outsider_cannot_act (test_core.LifecycleTests.test_invalid_world_and_outsider_cannot_act) ... ok
+test_only_owner_waives_and_remaining_ids_not_reindexed (test_core.LifecycleTests.test_only_owner_waives_and_remaining_ids_not_reindexed) ... ok
+test_reject_outsider_zero_duplicate_and_bad_seals (test_core.LifecycleTests.test_reject_outsider_zero_duplicate_and_bad_seals) ... ok
+test_roster_sealing_and_input_order_determinism (test_core.LifecycleTests.test_roster_sealing_and_input_order_determinism) ... ok
+test_unknown_blocks_waive_approval_and_reinstallation (test_core.LifecycleTests.test_unknown_blocks_waive_approval_and_reinstallation) ... ok
+test_waiver_invalidates_all_old_approvals_and_stale_calls (test_core.LifecycleTests.test_waiver_invalidates_all_old_approvals_and_stale_calls) ... ok
+test_all_small_masks_against_independent_set_oracle (test_core.SolverTests.test_all_small_masks_against_independent_set_oracle)
+4,681 families: all 0..4 clause families over a 3-world universe. ... ok
+test_empty_active_set_tautology_bounds_and_no_silent_clamp (test_core.SolverTests.test_empty_active_set_tautology_bounds_and_no_silent_clamp) ... ok
+test_single_impossible_clause_and_independent_multiple_cores (test_core.SolverTests.test_single_impossible_clause_and_independent_multiple_cores) ... ok
+test_three_way_obstruction_with_pairwise_witnesses (test_core.SolverTests.test_three_way_obstruction_with_pairwise_witnesses) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.586s
+
+OK

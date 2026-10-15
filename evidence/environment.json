@@ -1,0 +1,34 @@
+{
+  "python": "3.12.14",
+  "tests": {
+    "suite": "stdlib unittest",
+    "passed": 24,
+    "failed": 0,
+    "independent_oracle_families": 4681
+  },
+  "network": {
+    "configured_only": {
+      "name": "Stable Studionet",
+      "chain_id": 61999,
+      "rpc": "https://studio.genlayer.com/api"
+    },
+    "observed_methods": {
+      "eth_chainId": "HTTP 403",
+      "web3_clientVersion": "HTTP 403"
+    },
+    "verified_chain_id": null,
+    "verified_runner": null
+  },
+  "github": {
+    "connector_identity_verified": "halihalibt",
+    "browser_owner_verified": "halihalibt",
+    "repository_created": true,
+    "creation_status": "SUCCEEDED_AFTER_EXPLICIT_USER_APPROVAL",
+    "repository_url": "https://github.com/halihalibt/accord-space-genlayer",
+    "visibility": "public"
+  },
+  "execution_scope": "OFFLINE_DETERMINISTIC_ONLY",
+  "model_calls": 0,
+  "transactions_sent": 0,
+  "phase2_started": false
+}
