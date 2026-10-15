@@ -1,18 +1,19 @@
-# Production Intelligent Contract boundary
+# Complete native candidate source
 
-No deployable contract is provided in Phase 1. `accord_space/core.py` is the
-deterministic reference implementation; it must not be uploaded to Studio as if
-it were a finished Intelligent Contract.
+`accord_space.py` contains the COMPLETE Phase 2 candidate: deterministic core,
+frozen prompt and native SDK consensus/storage adapter. It has no local imports
+and is assembled from the project's own inputs by `scripts/build_contract.py`.
+Source provenance and exact SHA256 are recorded in `SOURCE_PROVENANCE.json`.
 
-Phase 2 must implement a complete native GenLayer adapter with real persistent
-storage, runtime-derived sender identity, a permissionless compilation write,
-independent Leader/Validator execution, and accepted-result-only state mutation.
-`install_accepted_compilation` is an internal reference seam for offline fixtures,
-never a public ABI endpoint. No public method may accept user-chosen masks or
-pretend that input validation is semantic consensus.
+The native candidate passed local pinned-SDK semantic validation and mocked
+Direct Mode tests. It has NOT been deployed or run with real models/validators;
+current Stable compatibility remains unverified. Do not treat an offline pass
+as deployment authorization or chain evidence.
 
-The complete future canonical production source belongs in this directory. The
-later Repository B must include its complete byte-identical copy and provenance
-with SHA256, not a wrapper. There is no production source hash or deployed
-contract address to report yet. SDK pins and adapter ABI remain unverified until
-Stable access and runner compatibility are restored. Do not migrate networks.
+`install_accepted_compilation` remains internal to the native accepted-result
+path. There is no public AST/mask/result endpoint. See
+`docs/PHASE2_NATIVE_ADAPTER.md` for the complete API and test limitations.
+
+Future Repository B must copy this ENTIRE canonical file byte-for-byte, with
+SHA256 and provenance, after the production version is frozen. No abbreviated
+wrapper is acceptable. No Repository B exists in this batch.
