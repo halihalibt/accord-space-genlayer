@@ -1,13 +1,13 @@
 # Stage and execution rules
 
-Account: halihalibt. This checkpoint delivers Phase 1. The user's later explicit
-authorization allows autonomous routine continuation; use docs/NEXT_RESUME.md
-after the quota pause. Preserve ACCORD-SPACE-V1. Do not redesign or import earlier
-project code. The current publication batch does not enter Phase 2.
+Account: halihalibt. Current batch: Phase 2 native consensus/storage candidate,
+offline SDK verification, Draft PR and a quota checkpoint. The user authorized
+autonomous routine continuation; use docs/NEXT_RESUME.md after the pause.
+Preserve ACCORD-SPACE-V1. Do not redesign or import earlier project code.
 
-- Current code is an offline deterministic core, not a deployable contract.
-- No AI Leader/Validator execution/implementation in Phase 1; the comparator is
-  deterministic support only. No paid APIs.
+- Complete native candidate source is assembled from the tested own core,
+  frozen prompt and adapter. Real model/network execution remains unverified.
+  No paid APIs. Do not claim Direct Mode is network consensus.
 - No Repository B, frontend changes, deployment, signing, transactions or Portal.
 - Stable Studionet only: chain 61999, https://studio.genlayer.com/api.
 - RPC errors are blockers for online certification, never permission to switch
@@ -19,5 +19,6 @@ project code. The current publication batch does not enter Phase 2.
 - Future B carries the COMPLETE canonical production contract source, identical
   bytes and SHA256. Real evidence needs FINALIZED, successful execution,
   consensus and actual readback; fixture data never stands in for these.
-- Run `python -m unittest discover -s tests -v` and
-  `python -m scripts.check_phase1` before a Phase 1 checkpoint.
+- Current checks: `python -m scripts.build_contract --check`,
+  `python -m scripts.check_phase2`, the complete pure+SDK test suite, and pinned
+  `genvm-linter` check/schema. Historical check_phase1 belongs to the prior main.

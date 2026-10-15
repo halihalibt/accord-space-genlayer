@@ -1,59 +1,58 @@
-# Phase 1 checkpoint — 2026-10-16 Asia/Shanghai
+# Phase 2 native candidate checkpoint — 2026-10-16 Asia/Shanghai
 
-## Status
+Repository A: https://github.com/halihalibt/accord-space-genlayer
+Authoritative Phase 1 main: `93101a9079d6e7e0e911669d003cf0652602e559`.
+Current work is a separate Phase 2 Draft PR candidate; main is preserved.
 
-Design gate: **GO for the Phase 1 deterministic implementation**.
-Offline deterministic implementation: **PASS**.
-Whole Phase 1 / online compatibility: **INCOMPLETE**.
-Public GitHub repository: **CREATED**, public, owner verified as `halihalibt`:
-https://github.com/halihalibt/accord-space-genlayer
-The user explicitly approved public creation/upload after the earlier review
-block. Publication of this checkpoint is the current delivery step.
+**Phase 2 offline SDK gate: PASS. Real Stable gate: NOT VERIFIED.**
+No deployment, actual model call, chain write, wallet, Portal, Repository B or
+frontend work occurred. The approved ice-jade visual assets remain unchanged.
 
-## Delivered
+## Complete source
 
-- Frozen protocol, trust/ownership boundaries and comparison document.
-- Complete deterministic reference core with strict typed AST evaluation.
-- Exhaustive finite-domain feasibility, all inclusion-minimal conflict cores and
-  correction sets, concrete deletion/repair witnesses.
-- Immutable-value lifecycle, member-only actions, owner-only irreversible waiver,
-  stale-state guards, waiver-triggered invalidation of every approval, and
-  unanimous same-plan commitment. Cancel before commitment is supported.
-- 24 passing offline tests; 4,681 mask families checked against an independent
-  set-based reference oracle inside one of those tests.
-- Phase guard and clearly labelled offline lifecycle trace.
+`contracts/accord_space.py` is a complete single-file candidate, not a wrapper.
+SHA256: `f99a6395f539c718027f2b6ab39801ccc22c2c0197fb7cbc27307b64563e886f`.
+`SOURCE_PROVENANCE.json` records assembly inputs and the pinned official SDK.
+The deterministic core remains unchanged from Phase 1.
 
-## Evidence
+The adapter derives identity from the runtime, uses actual SDK storage, and
+installs compilation results only after native Leader/Validator execution.
+Every Validator independently recompiles and compares each condition's entire
+finite-domain behavior. No public AST/mask/result write exists. Text mode
+preserves raw JSON for strict duplicate-key checking.
 
-`evidence/phase1-tests.txt` is a local Python unittest transcript.
-`evidence/offline-cycle-trace.json` uses fixture predicates; it is NOT a model
-result, SDK storage test, transaction receipt or consensus record.
-`evidence/environment.json` records current verification limits.
+## Verified evidence
 
-## Blockers
+- Python 3.12.14; 54 actually resolved packages in requirements.lock.txt.
+- Official GenVM v0.2.16 release SHA256 matched the published GitHub asset digest.
+- 46 tests PASS: 24 deterministic and 22 SDK Direct Mode tests. One pure test
+  includes 4,681 oracle families, not 4,681 separate test functions.
+- Native lint PASS; SDK semantic validation PASS; actual ABI extraction PASS:
+  6 writes, 4 views, 0 constructor parameters, no payable writes.
+- Callback pickling checks enabled; no storage/self capture in callbacks.
+- Exact generated-source assembly and phase guard PASS.
 
-1. Read-only Stable RPC `eth_chainId` and `web3_clientVersion` both returned
-   HTTP 403. Current chain identity/runner compatibility cannot be certified.
-   This does not establish a network outage. No network switching or retries.
-The earlier GitHub authorization blocker is resolved: the user explicitly
-approved the prepared public repository creation and upload on 2026-10-16.
-Both connector identity and browser repository ownership were verified as
-halihalibt. Creation succeeded and public repository metadata was read back.
+See evidence/phase2-tests.txt, phase2-lint.json, phase2-schema.json and
+`docs/PHASE2_NATIVE_ADAPTER.md` for details and limits.
 
-## Resume precisely
+The official test framework auto-decodes text-mode JSON mocks; a documented
+narrow test-only correction preserves registered raw text. It does not replace
+SDK storage or model the network. Direct Mode's provisional Leader write is
+explicitly restored with snapshot/revert in the rejection test. This is harness
+recovery, not real consensus rollback evidence.
 
-Repository A: `halihalibt/accord-space-genlayer`. Resume from the actual current
-remote main, verify this core's SHA256 against `SHA256SUMS.txt`, and read
-`docs/NEXT_RESUME.md`. Do not repeat concept selection or the historical audit.
+## Quota stopping point
 
-Restore Stable read-only access independently; do not send transactions to test
-connectivity. No paid API, no alternative chain. Do not call Phase 1 complete
-until the remaining authorized checks and remote checkpoint are real.
+The user reported 27% allowance and authorized autonomous progress with a chosen
+pause. Stop after a verified remote Draft PR. Do not start an extended live-model
+or network investigation. The actual current quota is not observable here.
 
-The user authorized autonomous continuation and asked to preserve the remaining
-30% five-hour allowance. Work pauses after this remote checkpoint by engineering
-judgment, not for a new routine approval. Model/SDK implementation is deferred
-to the next execution window. There is no production contract or deployment-ready
-ABI. No deployment, signing, transaction or Portal operation was performed or
-is included in this publication batch. The future product must preserve the
-approved Jijing visual package, not reconstruct it from a screenshot.
+Previous Stable read-only RPC attempts returned HTTP 403. This batch reused that
+result rather than repeating it. Local SDK validation does not certify current
+Stable runner compatibility, chain identity, model agreement, cost or finality.
+No alternative network was used.
+
+Resume from docs/NEXT_RESUME.md and the actual remote PR/head. Do not repeat
+screening, history deduplication or SDK installation when the pinned cache exists.
+No new routine approval is needed for authorized code work. This checkpoint is
+not transaction authorization and contains no chain evidence.

@@ -6,9 +6,11 @@ conflict cores and correction sets with concrete witnesses. Only a condition's
 owner can waive it. A plan commits only after every named participant approves
 the same feasible assignment at the same revision.
 
-**Status: Phase 1 deterministic reference core. Not deployed. No model calls,
-GenVM execution, or onchain consensus has been tested.** There is no deployable
-Intelligent Contract yet; the production adapter belongs to Phase 2.
+**Status: Phase 2 native candidate, offline verification only. Not deployed.**
+The complete single-file contract is in `contracts/accord_space.py`. Native SDK
+semantic validation and mocked Direct Mode tests pass. No real models,
+WebAssembly execution, or onchain consensus have been tested. See the
+[native adapter report](docs/PHASE2_NATIVE_ADAPTER.md).
 
 ## A concrete example
 
@@ -27,23 +29,24 @@ visual baseline. Repository B and its frontend have not been created in Phase 1.
 
 ## Run offline
 
-Python 3.12; standard library only. From this directory:
+The deterministic core needs only Python 3.12's standard library. From this directory:
 
 ```sh
 python -m unittest discover -s tests -v
-python -m scripts.check_phase1
 python -m scripts.demo
 ```
 
-The suite contains 24 tests, including an independent set-based oracle that
+The core suite contains 24 tests, including an independent set-based oracle that
 checks all 4,681 families of zero to four masks over a three-world universe.
 Fixture ASTs enter an explicitly internal boundary; they are not AI results.
-The demo is labelled `OFFLINE_DETERMINISTIC_FIXTURE`.
+The demo is labelled `OFFLINE_DETERMINISTIC_FIXTURE`. An additional 22 native
+Direct Mode tests use the pinned official SDK and mocked model outputs; setup
+and reproduction are in [the Phase 2 report](docs/PHASE2_NATIVE_ADAPTER.md).
 
 ## What is different
 
 The output is not an AI `consistent` label or a pairwise relation matrix. A
-bounded compiler is planned to produce executable, typed predicates. Independent
+bounded compiler produces executable, typed predicates. Independent
 validators must compile separately and compare each predicate's complete behavior
 over the frozen Cartesian domain. Deterministic code then solves and enforces
 the shared constraint state, including later owner-authorized relaxations.

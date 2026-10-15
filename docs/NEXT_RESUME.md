@@ -1,49 +1,58 @@
-# Resume after the quota checkpoint
+# Resume from the Phase 2 Draft PR
 
-User: continue autonomously without further routine approval, use halihalibt,
-preserve remaining five-hour quota. Current model specified by user:
-GPT-6.1 Sol, High. Do not infer actual remaining quota from elapsed time.
+Account: halihalibt. User model setting: GPT-6.1 Sol, High. The user authorized
+autonomous routine continuation and quota checkpoints; do not ask again merely
+to continue code/test/document work. Resumption needs an active execution window;
+there is no background restart job.
 
-The chosen stopping point is successful Repository A publication and verification.
-This does not schedule a background restart: resumption needs an active execution
-window. When active again, proceed directly from this checkpoint without repeating
-selection or asking whether to continue routine implementation.
+Repository A: https://github.com/halihalibt/accord-space-genlayer
+Unchanged Phase 1 main: `93101a9079d6e7e0e911669d003cf0652602e559`.
+Find the actual Phase 2 Draft PR and head before writing; remote state may change.
 
 ## Read first
 
-1. README.md
-2. PROJECT_CHECKPOINT.md
-3. docs/PROTOCOL_V1.md
-4. docs/ORIGINALITY.md
-5. contracts/README.md
+1. PROJECT_CHECKPOINT.md
+2. docs/PROTOCOL_V1.md
+3. docs/PHASE2_NATIVE_ADAPTER.md
+4. SOURCE_PROVENANCE.json
+5. contracts/accord_space.py
 
-Core SHA256: `cc6d527596bc5f7072b2d15b654c6c52fd79e9dbd8354983661eb901e0107dce`.
-Local prepublication checkpoint: `c8e082aef8d06a279eb0ea233cdda26be340ea2a`.
-This local commit is historical and differs from the eventual GitHub publication
-commit, which must be obtained from actual remote main.
+Canonical candidate SHA256:
+`f99a6395f539c718027f2b6ab39801ccc22c2c0197fb7cbc27307b64563e886f`.
+This is assembled from own core/prompt/adapter inputs; do not hand-edit the output.
 
-## Next substantive stage
+## Already done
 
-Restore only the necessary Stable read-only compatibility checks. RPC previously
-returned HTTP 403; do not repeatedly investigate the same egress issue or switch
-networks. If still unavailable, prepare the native SDK adapter and mock/direct
-tests offline, explicitly leaving runtime compatibility unverified. Do not use
-paid models or infer network consensus from mocks.
+Frozen concept gate and historical deduplication; complete finite-domain solver;
+4,681-family independent oracle; official SDK release/digest verification; locked
+dependencies; complete native Leader/Validator/storage candidate; 46 passing
+tests; native lint; actual SDK semantic validation and 10-method ABI extraction.
 
-Implement the planned GenLayer-native Leader/Validator and persistent storage
-adapter, preserving the frozen protocol. Independently compile each condition;
-compare each condition's complete bounded-domain behavior. The reference
-`install_accepted_compilation` seam must never become a user-supplied public AST
-or mask endpoint. Sender comes from the actual runtime, never an input parameter.
-Production code must be complete, linted and tested against a pinned, actually
-available official SDK. Do not manufacture an SDK compatibility claim.
+Direct Mode mocks models and is not a real committee. Its documented test-only
+text-response correction must not be silently removed or reported as network
+proof. Strict raw-JSON text mode is deliberate.
 
-Keep protocol revisions and source provenance clear. Do not start frontend work
-until this semantic/storage boundary has a tested checkpoint. Preserve Jijing's
-approved ice-jade visuals; reference package retained separately as the original
-CUTLINE visual handoff. No new style selection or replacement Dashboard.
+## Next limited batch
 
-This handoff authorizes routine code/test/document continuation within the user's
-instruction, not unbounded compute consumption or a financial transaction. No
-real deployment, wallet signing, chain writes, Retry, Appeal or Portal operation
-is part of the next code-only batch. Faucet GEN only; cash budget zero.
+1. Review the actual Draft PR against the frozen protocol and current main.
+   Confirm runtime sender, no supplied-result ABI, independent full-domain
+   compilation and accepted-result-only writes. Repeat only targeted tests if
+   a new change or concrete concern justifies it.
+2. Make a minimal Stable read-only compatibility check if access conditions have
+   changed. Previous RPC responses were HTTP 403. Do not repeatedly investigate
+   unchanged egress blocks, switch networks or invoke paid APIs.
+3. Record deployment-readiness and language-translation risks honestly. Do not
+   call the source chain-verified before actual Stable evidence exists. Draft PR
+   means a reviewable candidate, not a deployed production release.
+4. Once the code-only gate is sound, prepare the next product-stage handoff using
+   the already approved Jijing visual source. Do not restart style exploration.
+
+Original visual package: ice-jade-sanctuary.fragment.html, original scene PNG,
+scene WebP, Noto Serif SC license and VISUAL_BASELINE.md. Preserve ice-jade
+material, spatial transitions, continuous user-enabled ambience and unblocked
+local interaction. Participants edit their conditions, not the frontend world.
+Keep visual assets outside A's contract-focused repository until product work.
+
+No deployment, wallet signature, chain write, Retry, Appeal or Portal submission
+belongs to this code-only batch. A future transaction batch needs concrete scope
+and the user's signing flow. Zero cash, Faucet GEN only, Stable chain 61999 only.

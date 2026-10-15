@@ -1,9 +1,10 @@
 {
   "python": "3.12.14",
   "tests": {
-    "suite": "stdlib unittest",
-    "passed": 24,
+    "passed": 46,
     "failed": 0,
+    "core_tests": 24,
+    "sdk_direct_tests": 22,
     "independent_oracle_families": 4681
   },
   "network": {
@@ -27,8 +28,17 @@
     "repository_url": "https://github.com/halihalibt/accord-space-genlayer",
     "visibility": "public"
   },
-  "execution_scope": "OFFLINE_DETERMINISTIC_ONLY",
+  "execution_scope": "PHASE2_NATIVE_SDK_OFFLINE_ONLY",
   "model_calls": 0,
   "transactions_sent": 0,
-  "phase2_started": false
+  "phase2_started": true,
+  "native_sdk": {
+    "version": "v0.2.16",
+    "official_release_digest_verified": true,
+    "lint": "PASS",
+    "semantic_validation": "PASS",
+    "abi_methods": 10,
+    "real_wasm_execution": false,
+    "real_consensus": false
+  }
 }
