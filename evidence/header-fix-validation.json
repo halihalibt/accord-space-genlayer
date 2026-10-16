@@ -1,0 +1,191 @@
+{
+  "source_sha256": "84eec53fc6d9ed0c1fc3fd30b50983dfacd1a6308ff016303840c055660e7d72",
+  "python_ast_identical": true,
+  "python_tests": 49,
+  "sdk_subtests": 36,
+  "frontend_assertion_groups": 22,
+  "native_lint": {
+    "ok": true,
+    "lint": {
+      "ok": true,
+      "passed": 3
+    },
+    "validate": {
+      "ok": true,
+      "contract": "AccordSpace",
+      "methods": 10,
+      "view_methods": 4,
+      "write_methods": 6,
+      "ctor_params": 0
+    }
+  },
+  "schema": {
+    "ok": true,
+    "schema": {
+      "ctor": {
+        "params": [],
+        "kwparams": {}
+      },
+      "methods": {
+        "approve_plan": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ],
+            [
+              "world_id",
+              "int"
+            ],
+            [
+              "expected_hash",
+              "string"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": false,
+          "ret": "null",
+          "payable": false
+        },
+        "cancel_session": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": false,
+          "ret": "null",
+          "payable": false
+        },
+        "compile_session": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": false,
+          "ret": "null",
+          "payable": false
+        },
+        "create_session": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ],
+            [
+              "participants",
+              [
+                {
+                  "$rep": "address"
+                }
+              ]
+            ],
+            [
+              "domain_json",
+              "string"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": false,
+          "ret": "null",
+          "payable": false
+        },
+        "get_protocol": {
+          "params": [],
+          "kwparams": {},
+          "readonly": true,
+          "ret": "string"
+        },
+        "get_session": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": true,
+          "ret": "string"
+        },
+        "get_state_hash": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": true,
+          "ret": "string"
+        },
+        "list_sessions": {
+          "params": [
+            [
+              "offset",
+              "int"
+            ],
+            [
+              "limit",
+              "int"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": true,
+          "ret": [
+            {
+              "$rep": "string"
+            }
+          ]
+        },
+        "seal_conditions": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ],
+            [
+              "conditions",
+              [
+                {
+                  "$rep": "string"
+                }
+              ]
+            ]
+          ],
+          "kwparams": {},
+          "readonly": false,
+          "ret": "null",
+          "payable": false
+        },
+        "waive_condition": {
+          "params": [
+            [
+              "session_id",
+              "string"
+            ],
+            [
+              "clause_id",
+              "string"
+            ],
+            [
+              "expected_hash",
+              "string"
+            ]
+          ],
+          "kwparams": {},
+          "readonly": false,
+          "ret": "null",
+          "payable": false
+        }
+      }
+    }
+  },
+  "real_recovery_writes": 0,
+  "stable_source_schema_preflight": "BLOCKED_BY_AUTOMATIC_APPROVAL_REVIEW",
+  "browser_validation": "synthetic DOM only; canvas stubbed"
+}

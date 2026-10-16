@@ -1,8 +1,8 @@
 {
   "protocol": "ACCORD-SPACE-V1",
-  "status": "OFFLINE_NATIVE_CANDIDATE_NOT_DEPLOYED",
+  "status": "HEADER_FIXED_CANDIDATE_PREVIOUS_DEPLOYMENT_FAILED",
   "canonical_source": "contracts/accord_space.py",
-  "source_sha256": "f99a6395f539c718027f2b6ab39801ccc22c2c0197fb7cbc27307b64563e886f",
+  "source_sha256": "84eec53fc6d9ed0c1fc3fd30b50983dfacd1a6308ff016303840c055660e7d72",
   "assembly_inputs": {
     "accord_space/core.py": "cc6d527596bc5f7072b2d15b654c6c52fd79e9dbd8354983661eb901e0107dce",
     "accord_space/compiler_prompt.py": "13c79efed1af046692e30b1853c890286b95635ffb0fe6170ae9159641124de7",
@@ -16,5 +16,6 @@
     "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6"
   },
   "network_verified": false,
-  "model_execution": "MOCKED_ONLY"
+  "model_execution": "MOCKED_ONLY",
+  "previous_failed_source_sha256": "f99a6395f539c718027f2b6ab39801ccc22c2c0197fb7cbc27307b64563e886f"
 }

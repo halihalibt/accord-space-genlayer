@@ -1,0 +1,7 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "purpose": "read-only source schema preflight; no deploy or signing",
+  "time": "2026-10-16T05:50:14.960409+00:00",
+  "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+}

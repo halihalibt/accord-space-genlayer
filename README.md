@@ -60,6 +60,13 @@ Solvers and minimal unsatisfiable subsets are established techniques. This
 project claims a particular protocol design, not invention of constraint solving
 or global uniqueness. See [comparison](docs/ORIGINALITY.md).
 
+## Deployment recovery
+
+The first deployment finalized with `ERROR / invalid_contract`. A malformed
+leading runtime comment block was reproduced and corrected; business logic
+and Python AST are identical. See [repair evidence](docs/DEPLOYMENT_HEADER_FIX.md).
+There is no verified successful deployment yet.
+
 ## Boundaries
 
 - 2–4 fixed participants, 1–2 conditions each, at most 8 total.

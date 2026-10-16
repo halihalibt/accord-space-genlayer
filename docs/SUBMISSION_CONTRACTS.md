@@ -23,7 +23,7 @@ be relaxed into a successful result.
 
 Canonical source: contracts/accord_space.py (complete single file).
 
-SHA256: f99a6395f539c718027f2b6ab39801ccc22c2c0197fb7cbc27307b64563e886f
+SHA256: 84eec53fc6d9ed0c1fc3fd30b50983dfacd1a6308ff016303840c055660e7d72
 
 Offline evidence: 46 tests plus 36 SDK subtests, native lint and 10-method ABI.
 Models are mocked in those tests. No real deployment or consensus is claimed.
@@ -37,3 +37,6 @@ Fill only from actual evidence before submitting:
 - Public app visual/browser acceptance: PENDING
 
 See DEPLOYMENT_RUNBOOK.md. Portal has not been submitted.
+
+Deployment recovery: first attempt FINALIZED / ERROR / invalid_contract; header
+corrected, awaiting a verified new deployment. NOT_READY_FOR_PORTAL.

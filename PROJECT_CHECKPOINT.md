@@ -1,28 +1,24 @@
-# Reviewed native source + Jijing product checkpoint
+# AccordSpace checkpoint — deployment header recovery
 
-2026-10-16 Asia/Shanghai. PR #1 was reviewed and merged at
-`b08b408d425054baa4d679d959a289e8a7d5e550`. Complete canonical source unchanged:
-`f99a6395f539c718027f2b6ab39801ccc22c2c0197fb7cbc27307b64563e886f`.
+2026-10-16 Asia/Shanghai. See docs/DEPLOYMENT_HEADER_FIX.md for the recorded
+failed transaction, reproduced defect, exact changes and validation limits.
 
-Restored pinned toolchain: all 46 tests + 36 SDK subtests pass, exact assembly
-and security guard pass, native lint, SDK semantic validation and ABI pass.
-No real models, signatures, deployments or chain transactions were performed.
+Current canonical SHA256: `84eec53fc6d9ed0c1fc3fd30b50983dfacd1a6308ff016303840c055660e7d72`.
+The previously reviewed mechanism and Python AST are unchanged. Only the
+leading runtime configuration was separated from documentation by a blank line.
+Assembly guard now validates the complete leading configuration block.
 
-B now exists: https://github.com/halihalibt/jijing-accordspace . Original approved
-visual restored from the saved package, original scene hash verified. Product
-includes fixed no-wallet tutorial, all finite conflict/correction witnesses,
-owner-only waiver, unanimous approval, exact 64-bit/JSON handling, public final
-reads and wallet-signed client with budgets, account/chain invalidation and
-single-send guard against SDK ABI fallback. Complete canonical source copied.
-B has 15 product test groups, including 4,369 independent set-oracle families,
-Python/JS hash parity and a synthetic DOM lifecycle. Not fresh browser proof.
+49 tests + 36 SDK subtests, native lint/semantic checks and ABI pass.
+Source is copied byte-for-byte to Repository B. B now checks execution results
+separately from finality/consensus and disarms the allowance on execution error.
 
-Stable eth_chainId returned 61999 at 2026-10-15 21:28:34 UTC. Schema source read
-was blocked with HTTP 403 after a Node-fetch environment failure. This does not
-certify real runner compatibility, model agreement, finality or faucet funds.
-Do not repeat probing or switch networks. No supported managed preview browser
-was available; desktop/mobile visuals, WebGL/audio and actual wallet E2E are open.
+Real status: one FINALIZED deployment with ERROR / invalid_contract; zero
+successful deployments, zero real model compilations, zero Portal submissions.
+Native SDK checks do not certify Stable network compatibility. Full-source RPC
+preflight was blocked by automatic approval review; no workaround was attempted.
 
-See B docs/DEPLOYMENT_RUNBOOK.md for the prepared local/Studio 8-request conflict
-path with two user-controlled wallets. This is a proposed execution plan, not
-a signed transaction authorization. Portal remains NOT_READY_FOR_PORTAL.
+User authorized autonomous repair and continuation. New recovery scope: at most
+8 wallet requests including corrected deployment, failures count, user signs;
+original failed request remains recorded separately. Next step is one corrected
+deployment, then verify execution/consensus/source/get_protocol before creating
+any session. No automatic Retry/Appeal/resend. Stable 61999 only; cash zero.

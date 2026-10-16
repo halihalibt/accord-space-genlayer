@@ -2,9 +2,11 @@
 import ast
 from pathlib import Path
 from scripts.build_contract import ROOT, assembled
+from scripts.check_runner_header import runner_config
 
 source = (ROOT / "contracts/accord_space.py").read_text()
 assert source == assembled(), "Canonical source drift"
+runner_config(source)
 tree = ast.parse(source)
 contract = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == "AccordSpace")
 public = {n.name: n for n in contract.body if isinstance(n, ast.FunctionDef) and n.decorator_list}
