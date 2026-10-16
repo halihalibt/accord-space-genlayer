@@ -1,87 +1,55 @@
 # AccordSpace — Bounded Semantic Negotiation
 
-Turn independently owned natural-language conditions into a shared finite feasible
-space. When no plan satisfies every condition, compute all inclusion-minimal
-conflict cores and correction sets with concrete witnesses. Only a condition's
-owner can waive it. A plan commits only after every named participant approves
-the same feasible assignment at the same revision.
+AccordSpace turns independently owned natural-language conditions into a shared finite planning space. Each participant seals their own conditions; GenLayer independently compiles those conditions into typed predicates, while deterministic protocol code enumerates feasible worlds, minimal conflicts, and minimal corrections. A condition can only be relaxed by its owner, and a plan becomes committed only after every participant approves the same world at the same revision.
 
-**Status: Phase 2 native candidate, offline verification only. Not deployed.**
-The complete single-file contract is in `contracts/accord_space.py`. Native SDK
-semantic validation and mocked Direct Mode tests pass. No real models,
-WebAssembly execution, or onchain consensus have been tested. See the
-[native adapter report](docs/PHASE2_NATIVE_ADAPTER.md).
+## Stable Studionet verification
 
-## A concrete example
+The canonical Intelligent Contract is deployed on GenLayer Stable Studionet.
 
-Three program coordinators agree on the domain: A, B and C each have a position
-in `{0,1,2}`. They independently seal `A before B`, `B before C`, and `C before A`.
-Every pair has a satisfying assignment; all three together have none. The core
-finds the three-clause minimal conflict and three possible single-owner waivers.
-It cannot execute any waiver for another person. If A's owner waives only their
-condition, `(A=2, B=0, C=1)` is feasible and becomes binding protocol state only
-after all three participants explicitly approve it.
+- Network: Stable Studionet
+- Chain ID: 61999
+- Contract: `0x0F4A3Aa94A55ef41e8f4108a1513c7a4cB8e1ffe`
+- Canonical source: `contracts/accord_space.py`
+- Canonical source SHA256: `84eec53fc6d9ed0c1fc3fd30b50983dfacd1a6308ff016303840c055660e7d72`
+- Canonical source commit: `ceaef239fb4792bfb921f562cb94c1b472338be2`
 
-This records a shared program plan, not proof that the real event occurred.
-Participants do not edit a frontend world. The companion product is [霁境 / Jijing](https://github.com/halihalibt/jijing-accordspace):
-an ice-jade negotiation space preserving the approved original visual, with
-a fixed tutorial and wallet client. Real chain E2E remains pending.
+The deployed contract and source were verified against the same canonical SHA256. The repository records the finalized deployment receipt and the complete end-to-end session evidence.
 
-## Run offline
+## Verified session
 
-The deterministic core needs only Python 3.12's standard library. From this directory:
+Session `jijing_20261016_1442` used two participants and one declared variable, `x ∈ {0,1}`, meaning whether the night scene is enabled.
 
-```sh
-python -m unittest discover -s tests -v
-python -m scripts.demo
-```
+The real session reached these protocol states:
 
-The core suite contains 24 tests, including an independent set-based oracle that
-checks all 4,681 families of zero to four masks over a three-world universe.
-Fixture ASTs enter an explicitly internal boundary; they are not AI results.
-The demo is labelled `OFFLINE_DETERMINISTIC_FIXTURE`. An additional 22 native
-Direct Mode tests use the pinned official SDK and mocked model outputs; setup
-and reproduction are in [the Phase 2 report](docs/PHASE2_NATIVE_ADAPTER.md).
+1. Both participants sealed their own conditions.
+2. GenLayer compilation finalized with majority agreement and successful execution, producing `BLOCKED · R0` because the conditions conflicted.
+3. Participant B waived only their own condition (`C1`), after which the session finalized as `FEASIBLE · R1` with the unique feasible world `#1 / x=1`.
+4. Participant A and participant B each finalized an approval for world `#1`.
+5. The session reached `COMMITTED · R1` with `x=1`.
 
-## What is different
+The recorded receipts are real Stable Studionet results. Offline fixtures are not presented as network evidence.
 
-The output is not an AI `consistent` label or a pairwise relation matrix. A
-bounded compiler produces executable, typed predicates. Independent
-validators must compile separately and compare each predicate's complete behavior
-over the frozen Cartesian domain. Deterministic code then solves and enforces
-the shared constraint state, including later owner-authorized relaxations.
+## What the contract demonstrates
 
-Different AST syntax may be equivalent. Equal *current aggregate* feasibility
-is insufficient: two presently blocked compilations can allow different plans
-after the same owner relaxes a condition. Per-clause full-domain agreement is
-therefore a load-bearing validation rule, not a comparison of explanations.
+- Finite-domain semantic compilation with independent consensus.
+- Exact per-condition behavioral comparison over the complete declared domain.
+- Exhaustive feasible-world enumeration within bounded limits.
+- Inclusion-minimal conflict and correction witnesses.
+- Owner-only condition relaxation.
+- Revisioned approvals cleared by a waiver.
+- Unanimous commitment to one exact feasible assignment.
+- Strict rejection of malformed or uninterpreted semantic results.
 
-Solvers and minimal unsatisfiable subsets are established techniques. This
-project claims a particular protocol design, not invention of constraint solving
-or global uniqueness. See [comparison](docs/ORIGINALITY.md).
+The protocol is intentionally bounded. It does not claim to control real-world delivery, calendars, or external events; its guarantees apply to the declared formal domain and onchain protocol state.
 
-## Deployment recovery
+## Engineering validation
 
-The first deployment finalized with `ERROR / invalid_contract`. A malformed
-leading runtime comment block was reproduced and corrected; business logic
-and Python AST are identical. See [repair evidence](docs/DEPLOYMENT_HEADER_FIX.md).
-There is no verified successful deployment yet.
+The repository contains deterministic reference tests and pinned-SDK validation for the implementation. These are engineering checks; the finalized Stable Studionet receipts in `evidence/` are the separate source of real network evidence.
 
-## Boundaries
+## Canonical source
 
-- 2–4 fixed participants, 1–2 conditions each, at most 8 total.
-- 1–4 typed variables, 2–4 values each, at most 64 Cartesian assignments.
-- Whitelisted comparisons and Boolean expressions; no arbitrary executable code.
-- `UNKNOWN` blocks negotiation; malformed output is an error, never a result.
-- Only the bounded formal model is exhaustively solved. Translation fidelity
-  remains a semantic consensus problem and can be wrong even with consensus.
-- All inputs are public. No assets, payouts, identity claims, scores or rewards.
-- Every participant can cancel before commitment; inactivity can prevent progress.
+`contracts/accord_space.py` is the complete single-file Intelligent Contract, not a wrapper or abbreviated excerpt. Repository B contains the same file byte-for-byte.
 
-Planned network is **Stable Studionet only**, chain ID **61999**,
-`https://studio.genlayer.com/api`. The latest chain-ID read returned 61999 on 2026-10-15 UTC, while source-schema
-preflight remained blocked by HTTP 403. Runner compatibility, model agreement,
-latency and faucet access are unverified. No alternative network is authorized.
+See `contracts/README.md`, `docs/PROTOCOL_V1.md`, `docs/ORIGINALITY.md`, `docs/SUBMISSION_CONTRACTS.md`, and `evidence/FINAL_E2E_20261016.json`.
 
-See [protocol](docs/PROTOCOL_V1.md), [integration boundary](contracts/README.md),
-[checkpoint](PROJECT_CHECKPOINT.md), and [stage rules](AGENTS.md). MIT licensed.
+MIT licensed.

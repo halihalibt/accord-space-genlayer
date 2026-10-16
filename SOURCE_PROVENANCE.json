@@ -1,8 +1,9 @@
 {
   "protocol": "ACCORD-SPACE-V1",
-  "status": "HEADER_FIXED_CANDIDATE_PREVIOUS_DEPLOYMENT_FAILED",
+  "status": "DEPLOYED_AND_E2E_VERIFIED",
   "canonical_source": "contracts/accord_space.py",
   "source_sha256": "84eec53fc6d9ed0c1fc3fd30b50983dfacd1a6308ff016303840c055660e7d72",
+  "canonical_commit": "ceaef239fb4792bfb921f562cb94c1b472338be2",
   "assembly_inputs": {
     "accord_space/core.py": "cc6d527596bc5f7072b2d15b654c6c52fd79e9dbd8354983661eb901e0107dce",
     "accord_space/compiler_prompt.py": "13c79efed1af046692e30b1853c890286b95635ffb0fe6170ae9159641124de7",
@@ -15,7 +16,31 @@
     "official_asset_digest_verified": true,
     "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6"
   },
-  "network_verified": false,
-  "model_execution": "MOCKED_ONLY",
-  "previous_failed_source_sha256": "f99a6395f539c718027f2b6ab39801ccc22c2c0197fb7cbc27307b64563e886f"
+  "network": {
+    "name": "Stable Studionet",
+    "chain_id": 61999,
+    "rpc": "https://studio.genlayer.com/api"
+  },
+  "deployment": {
+    "address": "0x0F4A3Aa94A55ef41e8f4108a1513c7a4cB8e1ffe",
+    "transaction": "0x38396b6bdb9490404d8edb0c3da172e1317555675d6b408274de91c0cb97463b",
+    "finality": "FINALIZED",
+    "execution": "SUCCESS",
+    "consensus": "MAJORITY_AGREE"
+  },
+  "session": {
+    "id": "jijing_20261016_1442",
+    "participants": [
+      "0x22acaa233b7b985b36ef168f2de9295334065b15",
+      "0x49ce61764cca0c15a79e2d98baa535fc7547eb3a"
+    ],
+    "final_status": "COMMITTED",
+    "revision": 1,
+    "final_world_id": 1,
+    "final_assignment": {"x": 1},
+    "verification_basis": "Recorded finalized Stable Studionet receipts and final product-state readback."
+  },
+  "model_execution": "REAL_STABLE_STUDIONET_CONSENSUS",
+  "network_verified": true,
+  "portal_submitted": false
 }

@@ -1,19 +1,13 @@
-# Complete native candidate source
+# AccordSpace Intelligent Contract
 
-`accord_space.py` contains the COMPLETE Phase 2 candidate: deterministic core,
-frozen prompt and native SDK consensus/storage adapter. It has no local imports
-and is assembled from the project's own inputs by `scripts/build_contract.py`.
-Source provenance and exact SHA256 are recorded in `SOURCE_PROVENANCE.json`.
+`contracts/accord_space.py` is the complete canonical single-file Intelligent Contract for AccordSpace.
 
-The native candidate passed local pinned-SDK semantic validation and mocked
-Direct Mode tests. It has NOT been deployed or run with real models/validators;
-current Stable compatibility remains unverified. Do not treat an offline pass
-as deployment authorization or chain evidence.
+It contains the deterministic protocol core, semantic compilation prompt, native GenLayer SDK boundary, persistent state handling, sender authorization, and accepted-result installation path. The public ABI does not accept a caller-supplied AST, mask, or semantic result.
 
-`install_accepted_compilation` remains internal to the native accepted-result
-path. There is no public AST/mask/result endpoint. See
-`docs/PHASE2_NATIVE_ADAPTER.md` for the complete API and test limitations.
+Canonical SHA256:
 
-Future Repository B must copy this ENTIRE canonical file byte-for-byte, with
-SHA256 and provenance, after the production version is frozen. No abbreviated
-wrapper is acceptable. No Repository B exists in this batch.
+`84eec53fc6d9ed0c1fc3fd30b50983dfacd1a6308ff016303840c055660e7d72`
+
+The same complete file is included in Repository B at `contracts/accord_space.py` and has been verified byte-for-byte identical.
+
+The contract is deployed on Stable Studionet (chain 61999), and the repository records a finalized deployment plus a completed two-participant negotiation session.
