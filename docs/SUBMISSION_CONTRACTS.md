@@ -32,13 +32,13 @@ The contract is intentionally bounded and explicit: it does not claim to enforce
 
 ## Real session evidence
 
-Session: `jijing_20261016_1442`
+Session `jijing_20261016_1442`
 
-- `create_session`: `0x415551aa94660bd78a93188eaff50a238c1004b9703ab497055f6bf95f171080`
-- `compile_session`: `0x090edb124208ae9d8fa2fb1bcb93be81050d5c6cc725f1732d0bc45b7251ba4d` — FINALIZED / SUCCESS / MAJORITY_AGREE; 5 validators, 3 AGREE and 2 IDLE after quorum
-- `waive_condition`: `0x7f6d91cd677e43ec4338fa6cacf3fe89602bb63eb9b496b507012c2be545168f` — FINALIZED / SUCCESS / MAJORITY_AGREE; participant B waived C1
+- `create_session`: `0x415551aa94660bd78a93188eaff50a238c1004b9703ab497055f6bf95f171080` — FINALIZED / SUCCESS / MAJORITY_AGREE
 - `seal_conditions` A: `0xa7615e65ebcd737627e203d6ec79d6a88c42b23a4b10b5dfd8ff74c1bb3bf295` — FINALIZED / SUCCESS / MAJORITY_AGREE
 - `seal_conditions` B: `0x405799fbb9d48b484c4ca557851b0cf35d09fbe3f1f05f2e9d68031decf87805` — FINALIZED / SUCCESS / MAJORITY_AGREE
+- `compile_session`: `0x090edb124208ae9d8fa2fb1bcb93be81050d5c6cc725f1732d0bc45b7251ba4d` — FINALIZED / SUCCESS / MAJORITY_AGREE; 5 validators, 3 AGREE and 2 IDLE after quorum
+- `waive_condition`: `0x7f6d91cd677e43ec4338fa6cacf3fe89602bb63eb9b496b507012c2be545168f` — FINALIZED / SUCCESS / MAJORITY_AGREE; participant B waived C1
 - `approve_plan` A: `0xdd51da6d2b527c9713458cb6e1a47add815583202b9e2c9772da1ab485dfd2d6` — FINALIZED; world #1
 - `approve_plan` B: `0x86a93c879ba66430f4305ff9d5a1fff5040e272ed5c81d5c817c9533254dacac` — FINALIZED; world #1
 
