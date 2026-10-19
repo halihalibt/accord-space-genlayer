@@ -12,15 +12,91 @@
     "B": "0x49ce61764cca0c15a79e2d98baa535fc7547eb3a"
   },
   "transactions": [
-    {"stage":"deployment","hash":"0x38396b6bdb9490404d8edb0c3da172e1317555675d6b408274de91c0cb97463b","finality":"FINALIZED","execution":"SUCCESS","consensus":"MAJORITY_AGREE"},
-    {"stage":"create_session","hash":"0x415551aa94660bd78a93188eaff50a238c1004b9703ab497055f6bf95f171080","finality":"FINALIZED","execution":"SUCCESS","consensus":"MAJORITY_AGREE"},
-    {"stage":"compile_session","hash":"0x090edb124208ae9d8fa2fb1bcb93be81050d5c6cc725f1732d0bc45b7251ba4d","finality":"FINALIZED","execution":"SUCCESS","consensus":"MAJORITY_AGREE","validator_votes":{"agree":3,"idle_after_quorum":2,"total":5},"post_state":"BLOCKED · R0"},
-    {"stage":"waive_condition","hash":"0x7f6d91cd677e43ec4338fa6cacf3fe89602bb63eb9b496b507012c2be545168f","from":"0x49ce61764cca0c15a79e2d98baa535fc7547eb3a","clause":"C1","condition":"夜间场必须关闭，即 x 等于 0。","finality":"FINALIZED","execution":"SUCCESS","consensus":"MAJORITY_AGREE","post_state":"FEASIBLE · R1","unique_world":{"world_id":1,"x":1}},
-    {"stage":"seal_conditions_A","hash":"0xa7615e65ebcd737627e203d6ec79d6a88c42b23a4b10b5dfd8ff74c1bb3bf295","from":"0x22acaa233b7b985b36ef168f2de9295334065b15","condition":"夜间场必须启用，即 x 等于 1。","finality":"FINALIZED","execution":"SUCCESS","consensus":"MAJORITY_AGREE"},
-    {"stage":"seal_conditions_B","hash":"0x405799fbb9d48b484c4ca557851b0cf35d09fbe3f1f05f2e9d68031decf87805","from":"0x49ce61764cca0c15a79e2d98baa535fc7547eb3a","condition":"夜间场必须关闭，即 x 等于 0。","finality":"FINALIZED","execution":"SUCCESS","consensus":"MAJORITY_AGREE"},
-    {"stage":"approve_plan_A","hash":"0xdd51da6d2b527c9713458cb6e1a47add815583202b9e2c9772da1ab485dfd2d6","from":"0x22acaa233b7b985b36ef168f2de9295334065b15","world_id":1,"finality":"FINALIZED","execution":"SUCCESS"},
-    {"stage":"approve_plan_B","hash":"0x86a93c879ba66430f4305ff9d5a1fff5040e272ed5c81d5c817c9533254dacac","from":"0x49ce61764cca0c15a79e2d98baa535fc7547eb3a","world_id":1,"finality":"FINALIZED","execution":"SUCCESS"}
+    {
+      "stage": "deployment",
+      "hash": "0x38396b6bdb9490404d8edb0c3da172e1317555675d6b408274de91c0cb97463b",
+      "finality": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "stage": "create_session",
+      "hash": "0x415551aa94660bd78a93188eaff50a238c1004b9703ab497055f6bf95f171080",
+      "finality": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "stage": "seal_conditions_A",
+      "hash": "0xa7615e65ebcd737627e203d6ec79d6a88c42b23a4b10b5dfd8ff74c1bb3bf295",
+      "from": "0x22acaa233b7b985b36ef168f2de9295334065b15",
+      "condition": "夜间场必须启用，即 x 等于 1。",
+      "finality": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "stage": "seal_conditions_B",
+      "hash": "0x405799fbb9d48b484c4ca557851b0cf35d09fbe3f1f05f2e9d68031decf87805",
+      "from": "0x49ce61764cca0c15a79e2d98baa535fc7547eb3a",
+      "condition": "夜间场必须关闭，即 x 等于 0。",
+      "finality": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "stage": "compile_session",
+      "hash": "0x090edb124208ae9d8fa2fb1bcb93be81050d5c6cc725f1732d0bc45b7251ba4d",
+      "finality": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "validator_votes": {
+        "agree": 3,
+        "idle_after_quorum": 2,
+        "total": 5
+      },
+      "post_state": "BLOCKED · R0"
+    },
+    {
+      "stage": "waive_condition",
+      "hash": "0x7f6d91cd677e43ec4338fa6cacf3fe89602bb63eb9b496b507012c2be545168f",
+      "from": "0x49ce61764cca0c15a79e2d98baa535fc7547eb3a",
+      "clause": "C1",
+      "condition": "夜间场必须关闭，即 x 等于 0。",
+      "finality": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "post_state": "FEASIBLE · R1",
+      "unique_world": {
+        "world_id": 1,
+        "x": 1
+      }
+    },
+    {
+      "stage": "approve_plan_A",
+      "hash": "0xdd51da6d2b527c9713458cb6e1a47add815583202b9e2c9772da1ab485dfd2d6",
+      "from": "0x22acaa233b7b985b36ef168f2de9295334065b15",
+      "world_id": 1,
+      "finality": "FINALIZED",
+      "execution": "SUCCESS"
+    },
+    {
+      "stage": "approve_plan_B",
+      "hash": "0x86a93c879ba66430f4305ff9d5a1fff5040e272ed5c81d5c817c9533254dacac",
+      "from": "0x49ce61764cca0c15a79e2d98baa535fc7547eb3a",
+      "world_id": 1,
+      "finality": "FINALIZED",
+      "execution": "SUCCESS"
+    }
   ],
-  "final_state":{"status":"COMMITTED","revision":1,"world_id":1,"assignment":{"x":1}},
-  "evidence_basis":"User-exported Studio receipts plus final product-state readback."
+  "final_state": {
+    "status": "COMMITTED",
+    "revision": 1,
+    "world_id": 1,
+    "assignment": {
+      "x": 1
+    }
+  },
+  "evidence_basis": "Recorded finalized Studio receipts and final product-state readback; transactions are listed in protocol order.",
+  "canonical_source_commit": "ceaef239fb4792bfb921f562cb94c1b472338be2"
 }
