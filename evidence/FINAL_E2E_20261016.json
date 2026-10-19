@@ -24,7 +24,7 @@
       "finality": "FINALIZED",
       "execution": "SUCCESS",
       "consensus": "MAJORITY_AGREE",
-      "submitted_at_utc": "2026-10-16T06:46:44.112Z"
+      "submitted_at_utc": "2026-10-16T06:46:57.077Z"
     },
     {
       "stage": "seal_conditions_A",
